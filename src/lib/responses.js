@@ -7,11 +7,12 @@ module.exports = {
             values
         });
     },
-    err: (res, message = 'Ops, something went wrong') => {
+    err: (res, err, message = 'Ops, something went wrong') => {
         res.status(400).json({
             status: 400,
             error: true,
             message
         });
+        console.log(err);
     }
 }

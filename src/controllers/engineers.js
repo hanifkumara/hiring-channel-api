@@ -16,13 +16,12 @@ module.exports = {
                 response.ok(res, data);
             })
             .catch(err => {
-                response.err(res);
-                lib.sqlCheck(err);
+                response.err(res, err);
             });
     },
     addEngineer: (req, res) => {
         lib.formData(req, (err, fields) => {
-            if(err) log(err);
+            if(err) response.err(res, err);
             else {
                 const data = {
                     id: uuidv4(),
@@ -32,16 +31,13 @@ module.exports = {
                 };
                 models.addEngineers(data)
                     .then(result => response.ok(res, data, 'Engineer created', 201))
-                    .catch(err => {
-                        response.err(res);
-                        lib.sqlCheck(err);
-                    });
+                    .catch(err => response.err(res, err));
             }
         })
     },
     updateEngineer: (req, res) => {
         lib.formData(req, (err, fields) => {
-            if(err) log(err);
+            if(err) {log(err); res.end();}
             else {
                 const data = {
                     id: uuidv4(),
@@ -51,19 +47,14 @@ module.exports = {
                 };
                 models.updateEngineer(data)
                     .then(result => response.ok(res, data, 'Engineer updated'))
-                    .catch(err => {
-                        response.err(res);
-                        lib.sqlCheck(err);
-                    });
+                    .catch(err => response.err(res, err));
             }
         })
     },
     deleteEngineer: (req, res) => {
-        models.deleteEngineer(req.body)
-            .then(result => response.ok(res, data, 'Engineer updated'))
-            .catch(err => {
-                response.err(res);
-                lib.sqlCheck(err);
-            });
+        const data = req.body.id
+        models.deleteEngineer(data)
+            .then(result => response.ok(res, data, 'Engineer deleted'))
+            .catch(err => response.err(res, err));
     }
 }

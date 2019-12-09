@@ -10,44 +10,37 @@ module.exports = {
         models.getCompanies()
             .then(result => response.ok(res, result))
             .catch(err => {
-                response.err(res);
-                lib.sqlCheck(err);
+                response.err(res, err);
             });
     },
     addCompany: (req, res) => {
         lib.formData(req, (err, fields) => {
-            if(err) log(err);
+            if(err) response.err(res, err);
             else {
                 const data = {id: uuidv4(),...fields};
                 models.addCompany(data)
                     .then(result => response.ok(res, data, 'Company created', 201))
                     .catch(err => {
-                        response.err(res);
-                        lib.sqlCheck(err);
+                        response.err(res, err);
                     });
             }
         })
     },
     updateCompany: (req, res) => {
         lib.formData(req, (err, fields) => {
-            if(err) log(err);
+            if(err) response.err(res, err);
             else {
                 const data = fields;
                 models.updateCompany(data)
                     .then(result => response.ok(res, data, 'Company updated'))
-                    .catch(err => {
-                        response.err(res);
-                        lib.sqlCheck(err);
-                    });
+                    .catch(err => response.err(res, err));
             }
         })
     },
     deleteCompany: (req, res) => {
-        models.deleteCompany(req.body.id)
-            .then(result => response.ok(res, id, 'Company deleted'))
-            .catch(err => {
-                response.err(res);
-                lib.sqlCheck(err);
-            });
+        const data = req.body.id
+        models.deleteCompany(data)
+            .then(result => response.ok(res, data, 'Company deleted'))
+            .catch(err => response.err(res, err));
     }
-}
+};

@@ -5,7 +5,6 @@ const uuidv4 = require('uuid/v4');
 const log = console.log;
 
 module.exports = {
-    sqlCheck: err => console.log(err || 'Affected rows: 0'),
     date: () => {
         const d = new Date();
         return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
@@ -37,8 +36,9 @@ module.exports = {
                 callback(err);
                 return;
             }
+            const path = `public/assets/img/${uuidv4() + '_' + files.img.name}`;
             const oldPath = files.img.path;
-            const newPath = `public/assets/img/${uuidv4() + '_' + files.img.name}`;
+            const newPath = `E:/1/Git/hiring-channel-app/public/assets/img/${uuidv4() + '_' + files.img.name}`;
 
             fs.copyFile(oldPath, newPath, err => {
                 if(err) {
@@ -47,8 +47,8 @@ module.exports = {
                     fs.unlink(oldPath, err => {
                         if(err) log(err);
                     });
-                    data = {img: newPath, ...fields};
-                    callback(data);
+                    data = {img: path, ...fields};
+                    callback(err, data);
                 }
             });
         });
