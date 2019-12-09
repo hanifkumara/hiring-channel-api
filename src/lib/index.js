@@ -10,6 +10,11 @@ module.exports = {
         const d = new Date();
         return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
     },
+    cors: (req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Acces-Control-Allow-Headers', 'Origin, x-requested-with, Content-Type, Accept');
+        next();
+    },
     pagination: (data, page, show = 5) => {
         const start = show * (page - 1);
         const end = (show * page > data.length) ? data.length : show * page;
@@ -25,12 +30,11 @@ module.exports = {
     },
     formData: (req, callback) => {
         const form = new formidable.IncomingForm();
+        form.maxFileSize = 10 * 1024 * 1024;
 
         form.parse(req, (err, fields, files) => {
-            const data = {img: 'blank-img.jpg', ...fields};
-
             if(err) {
-                callback(data);
+                callback(err);
                 return;
             }
             const oldPath = files.img.path;
@@ -38,12 +42,12 @@ module.exports = {
 
             fs.copyFile(oldPath, newPath, err => {
                 if(err) {
-                    callback(data);
+                    callback(err);
                 } else {
                     fs.unlink(oldPath, err => {
                         if(err) log(err);
                     });
-                    data.img = newPath;
+                    data = {img: newPath, ...fields};
                     callback(data);
                 }
             });
