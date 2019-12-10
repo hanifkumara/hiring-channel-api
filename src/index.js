@@ -7,7 +7,7 @@ const users = require('./routers/users');
 
 const api = '/api/v1/';
 
-router.use(api + 'companies/', users);
+router.use(api, users);
 router.use(api + 'companies', companies);
 router.use(api + 'engineers', engineers);
 

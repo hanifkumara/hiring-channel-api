@@ -62,3 +62,10 @@
 //         });
 //     })
 //     .catch(err => response.err(res, err, err.message));
+
+const jwt = require('jsonwebtoken');
+
+jwt.sign({name: 'uut'}, 'secret', {expiresIn: process.env.AUTH_EXPIRES}, (err, token) => {
+    console.log(token);
+    jwt.verify('aw', 'secret', (err, decode) => console.log(err || decode));
+});

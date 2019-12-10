@@ -15,7 +15,7 @@ app.listen(port, () => log('Server is running on http://localhost:' + port));
 
 app.use(lib.cors);
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use('/', routerNav);
 app.get('*', (req, res) => res.send('404 Page Not Found'));

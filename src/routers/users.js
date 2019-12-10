@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/users');
+const auth = require('../auth');
 
-
-router.post('/signup', controller.signupCompany);
-router.post('/login', controller.loginCompany);
+// auth.level = 'user';
+// router.use(auth.checkToken);
+router.post('/signup', controller.userSignUp);
+router.post('/login', controller.userLogin);
 
 module.exports = router

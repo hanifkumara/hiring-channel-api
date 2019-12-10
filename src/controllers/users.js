@@ -1,6 +1,7 @@
 const uuidv4 = require('uuid/v4');
 const bcrypt = require('bcryptjs');
 
+const jwt = require('jsonwebtoken');
 const models = require('../models/users');
 const response = require('../lib/responses');
 const lib = require('../lib');
@@ -8,18 +9,23 @@ const log = console.log;
 const saltRounds = 10;
 
 module.exports = {
-    loginCompany: (req, res) => {
+    userLogin: (req, res) => {
         models.getUser(req.body.user)
             .then(result => {
-                const {password, username: user} = result[0];
+                const {password, username: user, level} = result[0];
                 bcrypt.compare(req.body.password, password).then(isValid => {
                     if(isValid == false) response.err(res, new Error(), "Wrong password!")
-                    else response.ok(res, user, 'Loggin success');
+                    else {
+                        jwt.sign({user, level}, process.env.AUTH_SECRET, (err, token) => {
+                            if(err) response.err(req, err);
+                            else response.ok(res, {user, level, token}, 'Loggin success');
+                        });
+                    }
                 });
             })
             .catch(err => response.err(res, err, "Couldn't find your account"))
     },
-    signupCompany: (req, res) => {
+    userSignUp: (req, res) => {
         lib.formData(req, (err, fields) => {
             if(err) response.err(res, err);
             else {
