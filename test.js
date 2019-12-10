@@ -47,3 +47,18 @@
 //         }
 //     });
 // });
+
+// models.addCompany(data.company)
+//     .then(result => {
+//         bcrypt.hash(data.user.password, saltRounds).then(hash => {
+//             data.user.password = hash;
+//             models.regisCompany(data.user)
+//                 .then(result => response.ok(res, data, 'Register success', 201))
+//                 .catch(err => {
+//                     models.deleteCompany(id)
+//                         .then(() => response.err(res, err, 'Ops, register failed'))
+//                         .catch(err => response.err(res, err, 'Ops, register failed'))
+//                 });
+//         });
+//     })
+//     .catch(err => response.err(res, err, err.message));
