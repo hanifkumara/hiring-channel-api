@@ -16,12 +16,12 @@ module.exports = {
                 response.ok(res, data);
             })
             .catch(err => {
-                response.err(res, err);
+                response.err(res, err, err.message);
             });
     },
     addEngineer: (req, res) => {
         lib.formData(req, (err, fields) => {
-            if(err) response.err(res, err);
+            if(err) response.err(res, err, err.message);
             else {
                 const data = {
                     id: uuidv4(),
@@ -31,7 +31,7 @@ module.exports = {
                 };
                 models.addEngineers(data)
                     .then(result => response.ok(res, data, 'Engineer created', 201))
-                    .catch(err => response.err(res, err));
+                    .catch(err => response.err(res, err, err.message));
             }
         })
     },
@@ -47,7 +47,7 @@ module.exports = {
                 };
                 models.updateEngineer(data)
                     .then(result => response.ok(res, data, 'Engineer updated'))
-                    .catch(err => response.err(res, err));
+                    .catch(err => response.err(res, err, err.message));
             }
         })
     },
@@ -55,6 +55,6 @@ module.exports = {
         const data = req.body.id
         models.deleteEngineer(data)
             .then(result => response.ok(res, data, 'Engineer deleted'))
-            .catch(err => response.err(res, err));
+            .catch(err => response.err(res, err, err.message));
     }
 }

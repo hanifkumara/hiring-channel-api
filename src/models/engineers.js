@@ -14,8 +14,9 @@ module.exports = {
     addEngineers: data => {
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO engineer SET ?', data, (err, result) => {
-                if (err) reject(new Error(err));
-                else resolve(result);
+                if (result.affectedRows > 0) resolve(result);
+                else reject(new Error(err || 'Failed to add engineer!'));
+                log(result);
             });
         });
     },
@@ -23,7 +24,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.query('UPDATE engineer SET ? WHERE id = ?', [data, data.id], (err, result) => {
                 if (result.affectedRows > 0) resolve(result);
-                else reject(new Error(err));
+                else reject(new Error(err || 'Engineer not found!'));
             });
         });
     },
@@ -31,7 +32,7 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.query('DELETE FROM engineer WHERE id = ?', id, (err, result) => {
                 if (result.affectedRows > 0) resolve(result);
-                else reject(new Error(err));
+                else reject(new Error(err || 'Engineer not found!'));
             });
         });
     }

@@ -42,6 +42,7 @@ module.exports = {
 
             fs.copyFile(oldPath, newPath, err => {
                 if(err) {
+                    err.message = 'Failed to add engineer!';
                     callback(err);
                 } else {
                     fs.unlink(oldPath, err => {
