@@ -1,10 +1,12 @@
 const db = require('../config/db');
 const {addCompany} = require('./companies');
+const {addEngineers} = require('./engineers');
 
 const log = console.log;
 
 module.exports = {
     addCompany,
+    addEngineers,
     regisUser: data => {
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO user SET ?', data, (err, result) => {

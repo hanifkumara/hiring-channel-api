@@ -2,11 +2,14 @@ const uuidv4 = require('uuid/v4');
 
 
 const models = require('../models/engineers');
+const {userSignUp, setUser} = require('./users');
 const response = require('../lib/responses');
 const lib = require('../lib');
 const log = console.log;
 
+setUser('1', 'engineer');
 module.exports = {
+    userSignUp,
     getEngineers: (req, res) => {
         let {sort = 'updated', name = '', skills = '', page = 1, show = 3} = req.query;
         let placeholder = [`%${name}%`, `%${skills}%`, sort];

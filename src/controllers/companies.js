@@ -1,11 +1,15 @@
 const uuidv4 = require('uuid/v4');
 
 const models = require('../models/companies');
+const {userSignUp, setUser} = require('./users');
 const response = require('../lib/responses');
 const lib = require('../lib');
 const log = console.log;
 
+setUser('1', 'company');
+
 module.exports = {
+    userSignUp,
     getCompanies: (req, res) => {
         models.getCompanies()
             .then(result => response.ok(res, result))

@@ -5,7 +5,6 @@ const auth = require('../auth');
 
 // auth.level = 'user';
 // router.use(auth.checkToken);
-router.post('/signup', controller.userSignUp);
 router.post('/login', controller.userLogin);
 
 module.exports = router
