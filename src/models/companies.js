@@ -6,7 +6,7 @@ module.exports = {
     getCompanies: () => {
         return new Promise((resolve, reject) => {
             db.query('SELECT * FROM company', (err, result) => {
-                if (err) reject(new Error(err));
+                if (err) reject(err);
                 else resolve(result);
             });
         });

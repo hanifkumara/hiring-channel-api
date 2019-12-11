@@ -1,16 +1,16 @@
 const db = require('../config/db');
 const {addCompany} = require('./companies');
-const {addEngineers} = require('./engineers');
+const {addEngineer} = require('./engineers');
 
 const log = console.log;
 
 module.exports = {
     addCompany,
-    addEngineers,
+    addEngineer,
     regisUser: data => {
         return new Promise((resolve, reject) => {
             db.query('INSERT INTO user SET ?', data, (err, result) => {
-                if (err || result.affectedRows == 0) reject(err || new Error('Failed to add company!'));
+                if (err || result.affectedRows == 0) reject(err || new Error('Sign up failed'));
                 else resolve(result);
             });
         });
@@ -18,7 +18,7 @@ module.exports = {
     deleteUser: id => {
         return new Promise((resolve, reject) => {
             db.query('DELETE FROM user WHERE user.id = ?', id, (err, result) => {
-                if (err || result.affectedRows == 0) reject(err || new Error('Company not found!'));
+                if (err || result.affectedRows == 0) reject(err || new Error('User not found!'));
                 else resolve(result);
             });
         });

@@ -63,9 +63,45 @@
 //     })
 //     .catch(err => response.err(res, err, err.message));
 
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 
-jwt.sign({name: 'uut'}, 'secret', {expiresIn: process.env.AUTH_EXPIRES}, (err, token) => {
-    console.log(token);
-    jwt.verify('aw', 'secret', (err, decode) => console.log(err || decode));
-});
+// jwt.sign({name: 'uut'}, 'secret', {expiresIn: process.env.AUTH_EXPIRES}, (err, token) => {
+//     console.log(token);
+//     jwt.verify('aw', 'secret', (err, decode) => console.log(err || decode));
+// });
+
+// if(data.user.role == 'company') {
+//     data.company = {
+//         id,
+//         name: fields.name,
+//         img: fields.img,
+//         location: fields.location,
+//         description: fields.description,
+//     };
+//     models.addCompany(data.company)
+//         .then(result => response.ok(res, data, 'Register successfully', 201))
+//         .catch(err => {
+//             models.deleteUser(id)
+//                 .then(() => response.err(res, err, 'Ops, register failed'))
+//                 .catch(err => response.err(res, err, 'Ops, register failed'))
+//         });
+// } else {
+//     data.engineer = {
+//         id,
+//         name: fields.name,
+//         img: fields.img,
+//         location: fields.location,
+//         description: fields.description,
+//         skills: fields.skills,
+//         birthdate: fields.birthdate,
+//         created: lib.date(),
+//         updated: lib.date(),
+//     };
+//     models.addEngineers(data.engineer)
+//         .then(result => response.ok(res, data, 'Register successfully', 201))
+//         .catch(err => {
+//             models.deleteUser(id)
+//                 .then(() => response.err(res, err, 'Ops, register failed'))
+//                 .catch(err => response.err(res, err, 'Ops, register failed'))
+//         });
+// }
