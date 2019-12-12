@@ -10,7 +10,6 @@ router.post('/', auth.checkToken);
 router.put('/', auth.checkToken);
 router.delete('/', auth.checkToken);
 
-router.post('/', controller.addCompany);
 router.put('/', controller.updateCompany);
 router.delete('/', controller.deleteCompany);
 

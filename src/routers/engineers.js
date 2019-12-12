@@ -10,7 +10,6 @@ router.post('/', auth.checkToken);
 router.put('/', auth.checkToken);
 router.delete('/', auth.checkToken);
 
-router.post('/', controller.addEngineer);
 router.put('/', controller.updateEngineer);
 router.delete('/', controller.deleteEngineer);
 

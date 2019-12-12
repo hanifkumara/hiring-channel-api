@@ -30,6 +30,7 @@ module.exports = {
     formData: (req, callback) => {
         const form = new formidable.IncomingForm();
         form.maxFileSize = 10 * 1024 * 1024;
+        // form.type = '.png';
 
         form.parse(req, (err, fields, files) => {
             if(err) {
