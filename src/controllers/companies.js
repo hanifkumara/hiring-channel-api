@@ -5,6 +5,17 @@ const response = require('../lib/responses');
 const lib = require('../lib');
 const log = console.log;
 
+const updateCompany = (req, res) => {
+    lib.formData(req, (err, fields) => {
+        if(err) response.err(res, err);
+        else {
+            const data = fields;
+            models.updateCompany(data)
+                .then(result => response.ok(res, data, 'Company updated'))
+                .catch(err => response.err(res, err, 'Failed to update company'));
+        }
+    });
+};
 
 module.exports = {
     getCompanies: (req, res) => {
@@ -21,23 +32,11 @@ module.exports = {
                 const data = {id: uuidv4(),...fields};
                 models.addCompany(data)
                     .then(result => response.ok(res, data, 'Company created', 201))
-                    .catch(err => {
-                        response.err(res, err, 'Failed to add company');
-                    });
+                    .catch(err => updateCompany(req, res));
             }
         });
     },
-    updateCompany: (req, res) => {
-        lib.formData(req, (err, fields) => {
-            if(err) response.err(res, err);
-            else {
-                const data = fields;
-                models.updateCompany(data)
-                    .then(result => response.ok(res, data, 'Company updated'))
-                    .catch(err => response.err(res, err, 'Failed to update company'));
-            }
-        });
-    },
+    updateCompany,
     deleteCompany: (req, res) => {
         const data = req.body.id
         models.deleteCompany(data)

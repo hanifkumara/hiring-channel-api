@@ -4,6 +4,14 @@ const uuidv4 = require('uuid/v4');
 
 const log = console.log;
 
+function validExtension(ext, acceptableExts) {
+    for(const acceptExt of acceptableExts) {
+        if(acceptExt == ext) {
+            return validExt = true;
+        }
+    }
+}
+
 module.exports = {
     date: () => {
         const d = new Date();
@@ -29,17 +37,25 @@ module.exports = {
     },
     formData: (req, callback) => {
         const form = new formidable.IncomingForm();
-        form.maxFileSize = 10 * 1024 * 1024;
-        // form.type = '.png';
+        form.maxFileSize = 1 * 1024 * 1024;
 
         form.parse(req, (err, fields, files) => {
             if(err) {
                 callback(err);
                 return;
             }
+
+            const split = files.img.name.split('.');
+            const ext = split[split.length - 1].toLocaleLowerCase();
+            const acceptableExts = ['png', 'jpg', 'jpeg', 'pdf'];
+            
+            if (validExtension(ext, acceptableExts) != true) {
+                callback(new Error('Invalid extension type, accepted is ' + acceptableExts.join(', ')));
+            }
+
             const path = `public/assets/img/${uuidv4() + '_' + files.img.name}`;
             const oldPath = files.img.path;
-            const newPath = `E:/1/Git/hiring-channel-app/public/assets/img/${uuidv4() + '_' + files.img.name}`;
+            const newPath = `${process.env.UPLOADED_IMG_PATH + uuidv4() + '_' + files.img.name}`;
 
             fs.copyFile(oldPath, newPath, err => {
                 if(err) {
