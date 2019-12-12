@@ -9,8 +9,13 @@ router.post('/engineers/signup', controller.userSignUp);
 
 auth.setLevel(1, 'user');
 router.put('/', auth.checkToken);
-
 router.put('/', controller.update);
+
+router.get('/messages', auth.checkToken);
+router.get('/messages', controller.getMsg);
+
+router.post('/messages', auth.checkToken);
+router.post('/messages', controller.sendMsg);
 
 
 module.exports = router

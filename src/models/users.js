@@ -30,5 +30,21 @@ module.exports = {
                 else resolve(result);
             });
         });
+    },
+    sendMsg: data => {
+        return new Promise((resolve, reject) => {
+            db.query(`INSERT INTO messages SET ?`, data, (err, result) => {
+                if (err || result.affectedRows == 0) reject(err || new Error('User not found'));
+                else resolve(result);
+            });
+        });
+    },
+    getMsg: id => {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM messages WHERE receiver = ? OR sender = ?', [id, id], (err, result) => {
+                if (err || result.affectedRows == 0) reject(err || new Error('User not found'));
+                else resolve(result);
+            });
+        });
     }
 };

@@ -14,6 +14,26 @@ const saltRounds = 10;
 // klo gak abis regis langsung masukin ke company/eng tapi isinya undefined, trus nanti di quey pake where not undefined, jadi si user coman bisa update
 
 module.exports = {
+    sendMsg: (req, res) => {
+        try {
+            const {id} = jwt.verify(req.query.token, process.env.AUTH_SECRET);
+            models.sendMsg({sender: id, ...req.body})
+                .then(result => response.ok(res, result, 'Message sent'))
+                .catch(err => response.err(res, err, "Cannot send message"));
+        } catch {
+            response.err(req, err);
+        }
+    },
+    getMsg: (req, res) => {
+        try {
+            const {id} = jwt.verify(req.query.token, process.env.AUTH_SECRET);
+            models.getMsg(id)
+                .then(result => response.ok(res, result, 'Sucessfully get message'))
+                .catch(err => response.err(res, err, 'Cannot get message'));
+        } catch {
+            response.err(req, err);
+        }
+    },
     update: (req, res) => {
         try{
             const {role} = jwt.verify(req.query.token, process.env.AUTH_SECRET);
