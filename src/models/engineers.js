@@ -5,8 +5,8 @@ const log = console.log;
 module.exports = {
     getEngineers: placeholder => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM engineer WHERE NOT name = "admin" AND name LIKE ? AND skills LIKE ? ORDER BY ??', placeholder, (err, result) => {
-                if (err) reject(err);
+            db.query('SELECT * FROM engineer WHERE NOT name = "admin" AND name LIKE ? AND skills LIKE ? ORDER BY ?? LIMIT ?, ?', placeholder, (err, result) => {
+                if (err) reject(new Error('Data tidak ditemukan'));
                 else resolve(result);
             });
         });

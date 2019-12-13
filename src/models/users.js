@@ -41,7 +41,7 @@ module.exports = {
     },
     getMsg: id => {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM messages WHERE receiver = ? OR sender = ?', [id, id], (err, result) => {
+            db.query('SELECT id, JSON_ARRAYGG(message) AS message FROM messages WHERE receiver = ? OR sender = ?', [id, id], (err, result) => {
                 if (err || result.affectedRows == 0) reject(err || new Error('User not found'));
                 else resolve(result);
             });
