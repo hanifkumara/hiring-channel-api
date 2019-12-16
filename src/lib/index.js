@@ -49,9 +49,9 @@ module.exports = {
             const ext = split[split.length - 1].toLocaleLowerCase();
             const acceptableExts = ['png', 'jpg', 'jpeg', 'pdf'];
             
-            if (validExtension(ext, acceptableExts) != true) {
-                callback(new Error('Invalid extension type, accepted is ' + acceptableExts.join(', ')));
-            }
+            // if (validExtension(ext, acceptableExts) != true) {
+            //     callback(new Error('Invalid extension type, accepted is ' + acceptableExts.join(', ')));
+            // }
 
             const path = `public/assets/img/${uuidv4() + '_' + files.img.name}`;
             const oldPath = files.img.path;
