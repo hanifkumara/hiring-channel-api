@@ -49,12 +49,14 @@ module.exports = {
             const ext = split[split.length - 1].toLocaleLowerCase();
             const acceptableExts = ['png', 'jpg', 'jpeg', 'pdf'];
             
-            if (validExtension(ext, acceptableExts) != true) {
-                callback(new Error('Invalid extension type, accepted is ' + acceptableExts.join(', ')));
-            }
+            // if (validExtension(ext, acceptableExts) != true) {
+            //     callback(new Error('Invalid extension type, accepted is ' + acceptableExts.join(', ')));
+            // }
 
+            const id = uuidv4();
+            const fileDir = `public/assets/images/${id + '_' + files.img.name}`;
             const oldPath = files.img.path;
-            const newPath = `${process.env.UPLOADED_IMG_PATH + uuidv4() + '_' + files.img.name}`;
+            const newPath = `${'src/' + fileDir}`;
 
             fs.copyFile(oldPath, newPath, err => {
                 if(err) {
@@ -64,13 +66,10 @@ module.exports = {
                     fs.unlink(oldPath, err => {
                         if(err) log(err);
                     });
-                    data = {img: newPath, ...fields};
+                    data = {img: fileDir, ...fields};
                     callback(err, data);
                 }
             });
         });
     }
 }
-
-// Notes
-// - Engineer showcase > img (easy query)
