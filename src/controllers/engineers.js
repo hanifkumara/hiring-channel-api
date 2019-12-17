@@ -39,7 +39,7 @@ module.exports = {
     },
     updateEngineer: (req, res) => {
         lib.formData(req, (err, fields) => {
-            if(err) {response.err(res, err, err.message);}
+            if(err) {log(err); res.end();}
             else {
                 const data = {
                     id: uuidv4(),

@@ -37,7 +37,6 @@ module.exports = {
     update: (req, res) => {
         try{
             const {role} = jwt.verify(req.query.token, process.env.AUTH_SECRET);
-            // Make switch() juga boleh
             if(role == 'company') {
                 addCompany(req, res);
             } else if(role == 'engineer') {
