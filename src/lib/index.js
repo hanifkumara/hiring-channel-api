@@ -53,7 +53,6 @@ module.exports = {
             //     callback(new Error('Invalid extension type, accepted is ' + acceptableExts.join(', ')));
             // }
 
-            const path = `public/assets/img/${uuidv4() + '_' + files.img.name}`;
             const oldPath = files.img.path;
             const newPath = `${process.env.UPLOADED_IMG_PATH + uuidv4() + '_' + files.img.name}`;
 
@@ -65,7 +64,7 @@ module.exports = {
                     fs.unlink(oldPath, err => {
                         if(err) log(err);
                     });
-                    data = {img: path, ...fields};
+                    data = {img: newPath, ...fields};
                     callback(err, data);
                 }
             });
