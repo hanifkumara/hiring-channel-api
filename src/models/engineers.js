@@ -4,8 +4,9 @@ const log = console.log;
 
 module.exports = {
     getEngineers: placeholder => {
+        const perfectQuery = 'SELECT engineer.id, engineer.name, engineer.skills, engineer.salary, TIMESTAMPDIFF(MINUTE, engineer.updated, now()) AS updated, engineer.img, user.email FROM engineer INNER JOIN user on engineer.id = user.id WHERE NOT name = "Luhut Andreas" AND name LIKE ? AND skills LIKE ? ORDER BY ?? LIMIT ?, ?';
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM engineer WHERE NOT name = "admin" AND name LIKE ? AND skills LIKE ? ORDER BY ?? LIMIT ?, ?', placeholder, (err, result) => {
+            db.query('SELECT engineer.id, engineer.name, engineer.skills, engineer.salary, TIMESTAMPDIFF(MINUTE, engineer.updated, now()) AS updated, engineer.img, user.email FROM engineer INNER JOIN user on engineer.id = user.id WHERE NOT name = "Luhut Andreas" AND (name LIKE ? OR skills LIKE ? OR salary LIKE ?) ORDER BY ?? LIMIT ?, ?', placeholder, (err, result) => {
                 if (err) reject(new Error('Data tidak ditemukan'));
                 else resolve(result);
             });
