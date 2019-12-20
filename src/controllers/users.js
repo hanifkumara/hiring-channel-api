@@ -2,8 +2,8 @@ const uuidv4 = require("uuid/v4");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const { addCompany } = require("./companies");
-const { addEngineer } = require("./engineers");
+const { updateCompany } = require("./companies");
+const { updateEngineer } = require("./engineers");
 const models = require("../models/users");
 const response = require("../lib/responses");
 const lib = require("../lib");
@@ -40,9 +40,9 @@ module.exports = {
     try {
       const { role } = jwt.verify(req.query.token, process.env.AUTH_SECRET);
       if (role == "company") {
-        addCompany(req, res);
+        updateCompany(req, res);
       } else if (role == "engineer") {
-        addEngineer(req, res);
+        updateEngineer(req, res);
       } else {
         response.err(req, err);
       }
@@ -65,7 +65,14 @@ module.exports = {
               process.env.AUTH_SECRET,
               (err, token) => {
                 if (err) response.err(req, err);
-                else response.ok(res, { id, level, token }, "Loggin success");
+                else {
+                  const username = result[0].username;
+                  response.ok(
+                    res,
+                    { id, username, level, role, token },
+                    "Loggin success"
+                  );
+                }
               }
             );
           }

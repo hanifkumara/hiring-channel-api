@@ -20,7 +20,7 @@ module.exports = {
   getEngineersByid: placeholder => {
     return new Promise((resolve, reject) => {
       db.query(
-        'SELECT engineer.id, engineer.name, engineer.description, engineer.skills, engineer.salary, TIMESTAMPDIFF(MINUTE, engineer.updated, now()) AS updated, engineer.img, user.email FROM engineer INNER JOIN user on engineer.id = user.id WHERE NOT name = "Luhut Andreas" AND engineer.id = ?',
+        'SELECT engineer.id, name, description, skills, birthdate, location, salary, TIMESTAMPDIFF(MINUTE, engineer.updated, now()) AS updated, img, user.email FROM engineer INNER JOIN user on engineer.id = user.id WHERE NOT name = "Luhut Andreas" AND engineer.id = ?',
         placeholder,
         (err, result) => {
           if (err) reject(new Error("Data tidak ditemukan"));
