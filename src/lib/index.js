@@ -7,7 +7,7 @@ const log = console.log;
 function validExtension(ext, acceptableExts) {
   for (const acceptExt of acceptableExts) {
     if (acceptExt == ext) {
-      return (validExt = true);
+      return true;
     }
   }
 }
@@ -46,15 +46,25 @@ module.exports = {
       if (err) {
         callback(err);
         return;
+      } else if (
+        Object.entries(files).length == 0 &&
+        files.constructor == Object
+      ) {
+        callback(undefined, { ...fields });
+        return;
       }
 
       const split = files.img.name.split(".");
       const ext = split[split.length - 1].toLocaleLowerCase();
       const acceptableExts = ["png", "jpg", "jpeg", "pdf"];
 
-      // if (validExtension(ext, acceptableExts) != true) {
-      //     callback(new Error('Invalid extension type, accepted is ' + acceptableExts.join(', ')));
-      // }
+      if (validExtension(ext, acceptableExts) != true) {
+        callback(
+          new Error(
+            "Invalid extension type, accepted is " + acceptableExts.join(", ")
+          )
+        );
+      }
 
       const id = uuidv4();
       const fileDir = `public/assets/images/${id + "_" + files.img.name}`;
@@ -69,7 +79,7 @@ module.exports = {
           fs.unlink(oldPath, err => {
             if (err) log(err);
           });
-          data = { img: fileDir, ...fields };
+          const data = { img: fileDir, ...fields };
           callback(err, data);
         }
       });
