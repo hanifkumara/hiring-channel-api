@@ -40,7 +40,7 @@ module.exports = {
   },
   formData: (req, callback) => {
     const form = new formidable.IncomingForm();
-    form.maxFileSize = 1 * 1024 * 1024;
+    form.maxFileSize = 1024 * 1024;
 
     form.parse(req, (err, fields, files) => {
       if (err) {

@@ -57,7 +57,7 @@ module.exports = {
         const { password, id, level, role } = result[0];
         bcrypt.compare(req.body.password, password).then(isValid => {
           if (isValid == false)
-            response.err(res, new Error(), "Wrong password!");
+            response.err(res, new Error("Wrong password!"), "Wrong password!");
           else {
             // Simpen di file auth
             jwt.sign(

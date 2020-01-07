@@ -5,7 +5,7 @@ const log = console.log;
 module.exports = {
   getCompanies: () => {
     return new Promise((resolve, reject) => {
-      db.query("SELECT * FROM company", (err, result) => {
+      db.query('SELECT * FROM company WHERE NOT img = "" AND NOT description =""', (err, result) => {
         if (err) reject(err);
         else resolve(result);
       });
