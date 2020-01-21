@@ -2,6 +2,6 @@
 
 - Clone repo
 - cd to the repo
-- Install dependency modules (package:  json)
+- npm install
 - Set .env
 - Run app: npm start
