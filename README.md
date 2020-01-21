@@ -46,8 +46,7 @@ npm start
 
 ## REST API
 
-You can view my Postman collection [here](https://www.getpostman.com/collections/65e37e55e8c3d1a69d55).
-
+You can view my Postman collection [here](https://www.getpostman.com/collections/65e37e55e8c3d1a69d55) or [![run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/65e37e55e8c3d1a69d55)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
