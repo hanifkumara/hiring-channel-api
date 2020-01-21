@@ -15,6 +15,8 @@ npm install
 
 ## Setup .env example
 
+Create .env file in your root project folder.
+
 ```env
 
 PORT=8000
@@ -41,6 +43,10 @@ On deploy
 ```bash
 npm start
 ```
+
+## REST API
+
+You can view my Postman collection [here](https://www.getpostman.com/collections/65e37e55e8c3d1a69d55)
 
 
 ## Contributing
