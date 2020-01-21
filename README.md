@@ -46,7 +46,7 @@ npm start
 
 ## REST API
 
-You can view my Postman collection [here](https://www.getpostman.com/collections/65e37e55e8c3d1a69d55)
+You can view my Postman collection [here](https://www.getpostman.com/collections/65e37e55e8c3d1a69d55).
 
 
 ## Contributing
