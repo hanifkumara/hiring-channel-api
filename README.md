@@ -38,7 +38,7 @@ Development mode
 npm run dev
 ```
 
-On deploy
+Deploy mode
 
 ```bash
 npm start
