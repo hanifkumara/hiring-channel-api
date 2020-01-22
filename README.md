@@ -13,7 +13,7 @@ This API is for Hiring Channel App where Engineers and Company can communicate f
 
 ## Installation
 
-Use the package manager npm to install dependencies.
+Clone this repository and then use the package manager npm to install dependencies.
 
 
 ```bash
