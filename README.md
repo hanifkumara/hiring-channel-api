@@ -8,7 +8,7 @@ This API is for Hiring Channel App where Engineers and Company can communicate f
 
 ## Requirements
 * [Node.js](https://nodejs.org/en/)
-* [Postman for testing](https://www.getpostman.com/)
+* [Postman](https://www.getpostman.com/) for testing
 * [Database](database-example.sql)
 
 ## Installation
