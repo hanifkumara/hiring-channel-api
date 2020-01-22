@@ -1,12 +1,15 @@
 # Hiring Channel API
 
+This API is for Hiring Channel App where Engineers and Company can communicate for looking/hiring jobs.
+
 ## Built With
 * [Node.js](https://nodejs.org/en/)
 * [Express.js](https://expressjs.com/)
 
 ## Requirements
+* [Node.js](https://nodejs.org/en/)
 * [Postman for testing](https://www.getpostman.com/)
-* [Database](https://www.getpostman.com/)
+* [Database](database-example.sql)
 
 ## Installation
 
