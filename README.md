@@ -4,6 +4,10 @@
 * [Node.js](https://nodejs.org/en/)
 * [Express.js](https://expressjs.com/)
 
+## Requirements
+* [Postman for testing](https://www.getpostman.com/)
+* [Database](https://www.getpostman.com/)
+
 ## Installation
 
 Use the package manager npm to install dependencies.
